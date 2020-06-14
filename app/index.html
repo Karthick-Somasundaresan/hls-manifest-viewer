@@ -2,14 +2,16 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Hls Manifest Viewer</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
-  <body>
-    <input type="text" id="txtManifest"/>
+  <body style="background-color:gainsboro;">
+      <label for="txtManifest" >Enter Manifest URL:</label>
+    <input type="text" style="width: 70%;" id="txtManifest"/>
     <!-- <button id="btnGo" value="GO" onclick="buttonClick(value)"> GO </button> -->
     <button id="btnGo" value="GO"> GO </button>
+    <div id="loading" style="display: none;"><img src="../resources/XOsX.gif" alt="Loading image"></div>
     <div id="playlist"></div>
     <script src="index.js"></script>
 

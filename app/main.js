@@ -1,4 +1,51 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,Menu } = require('electron')
+
+
+function createApplicationMenu(){
+    let fileMenu = ""
+    let aboutMenu = ""
+    if (process.platform !== "darwin"){
+        fileMenu = {
+            label: "File",
+            submenu: [{
+                label: "Close Window",
+                accelerator: "Alt+F4",
+                'click': function(){app.quit()}
+            }]
+        };
+    } else {
+        fileMenu = {
+            label: app.getName(),
+            submenu: [{
+                label: "Close Window",
+                accelerator: "Command+Q",
+                'click': function(){app.quit()}
+            }]
+        };
+    }
+    editMenu = {
+      label: "Edit",
+      submenu: [
+        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+        { type: "separator" },
+        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+      ]
+    }
+    aboutMenu = {
+        label: "About",
+        submenu: [{
+            label: "Help"
+        }]
+    };
+    template = [fileMenu, editMenu, aboutMenu]
+ 
+    let menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+}
 
 function createWindow () {
   // Create the browser window.
@@ -6,7 +53,8 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule:true
     }
   })
 
@@ -14,7 +62,7 @@ function createWindow () {
   win.loadFile('app/index.html')
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -31,6 +79,9 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.on('ready', ()=>{
+    createApplicationMenu();
+})
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.

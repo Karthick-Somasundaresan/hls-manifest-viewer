@@ -1,0 +1,32 @@
+{
+  "name": "hls-manifest-viewer",
+  "version": "1.0.0",
+  "description": "Viewer for HLS manifest",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karthick-Somasundaresan/hls-manifest-viewer.git"
+  },
+  "keywords": [
+    "HLS",
+    "Manifest",
+    "Viewer"
+  ],
+  "author": "Karthick Somasundaresan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karthick-Somasundaresan/hls-manifest-viewer/issues"
+  },
+  "homepage": "https://github.com/Karthick-Somasundaresan/hls-manifest-viewer#readme",
+  "devDependencies": {
+    "electron": "^9.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "url-parse": "^1.4.7"
+  }
+}
