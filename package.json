@@ -5,7 +5,9 @@
   "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,47 @@
     "url": "https://github.com/Karthick-Somasundaresan/hls-manifest-viewer/issues"
   },
   "homepage": "https://github.com/Karthick-Somasundaresan/hls-manifest-viewer#readme",
+  "build": {
+    "appId": "com.karthicks.hls-manifest-viewer",
+    "productName": "HLS Manifest Viewer",
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "dmg":{
+      "title":"${productName} ${version}",
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+        "target": ["nsis"],
+        "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "uninstallDisplayName": "HLS Manifest Viewer",
+      "license": "license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+
+    }
+  },
   "devDependencies": {
-    "electron": "^9.0.2"
+    "electron": "^9.0.2",
+    "electron-builder": "^22.7.0"
   },
   "dependencies": {
     "axios": "^0.19.2",
